@@ -68,7 +68,7 @@
 <link href="/time.github.io/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="MySQL," />
+  <meta name="keywords" content="MVC," />
 
 
 
@@ -84,27 +84,63 @@
 
 
 
-<meta name="description" content="#MySQL初见
-##什么是数据库？数据库（Database）是按照数据结构来组织、存储和管理数据的仓库。
-每个数据库都有一个或多个不同的API用于创建，访问，管理，搜索和复制所保存的数据。
-我们也可以将数据存储在文件中，但是在文件中读写数据速度相对较慢。所以，现在我们使用关系型数据库管理系统（RDBMS）来存储和管理的大数据量。所谓的关系型数据库，是建立在关系模型基础上的数据库，借助于集合代数等">
+<meta name="description" content="#MVCMVC模式的意思是，软件可以分成三个部分。
+
+视图（View）：用户界面。
+控制器（Controller）：业务逻辑
+模型（Model）：数据保存
+
+各部分之间的通信方式如下:
+
+View 传送指令到 Controller  
+Controller 完成业务逻辑后，要求 Model 改变状态  
+Model 将新的数据发送到 View，用户得到反馈  
+
+####所有通信都是单向的。
+##">
 <meta property="og:type" content="article">
-<meta property="og:title" content="MySQL">
-<meta property="og:url" content="https://xingshijun.github.io/time.github.io/2017/01/03/MySQL/index.html">
+<meta property="og:title" content="MVC/MVP/MVVM的区别">
+<meta property="og:url" content="https://xingshijun.github.io/time.github.io/2017/02/11/MVC-MVP-MVVM/index.html">
 <meta property="og:site_name" content="Timer">
-<meta property="og:description" content="#MySQL初见
-##什么是数据库？数据库（Database）是按照数据结构来组织、存储和管理数据的仓库。
-每个数据库都有一个或多个不同的API用于创建，访问，管理，搜索和复制所保存的数据。
-我们也可以将数据存储在文件中，但是在文件中读写数据速度相对较慢。所以，现在我们使用关系型数据库管理系统（RDBMS）来存储和管理的大数据量。所谓的关系型数据库，是建立在关系模型基础上的数据库，借助于集合代数等">
-<meta property="og:image" content="http://i.imgur.com/pvHdTG0.png">
-<meta property="og:updated_time" content="2017-01-04T02:03:31.990Z">
+<meta property="og:description" content="#MVCMVC模式的意思是，软件可以分成三个部分。
+
+视图（View）：用户界面。
+控制器（Controller）：业务逻辑
+模型（Model）：数据保存
+
+各部分之间的通信方式如下:
+
+View 传送指令到 Controller  
+Controller 完成业务逻辑后，要求 Model 改变状态  
+Model 将新的数据发送到 View，用户得到反馈  
+
+####所有通信都是单向的。
+##">
+<meta property="og:image" content="http://image.beekka.com/blog/2015/bg2015020104.png">
+<meta property="og:image" content="http://image.beekka.com/blog/2015/bg2015020105.png">
+<meta property="og:image" content="http://image.beekka.com/blog/2015/bg2015020106.png">
+<meta property="og:image" content="http://image.beekka.com/blog/2015/bg2015020107.png">
+<meta property="og:image" content="http://image.beekka.com/blog/2015/bg2015020108.png">
+<meta property="og:image" content="http://image.beekka.com/blog/2015/bg2015020109.png">
+<meta property="og:image" content="http://image.beekka.com/blog/2015/bg2015020110.png">
+<meta property="og:updated_time" content="2017-02-11T14:56:48.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="MySQL">
-<meta name="twitter:description" content="#MySQL初见
-##什么是数据库？数据库（Database）是按照数据结构来组织、存储和管理数据的仓库。
-每个数据库都有一个或多个不同的API用于创建，访问，管理，搜索和复制所保存的数据。
-我们也可以将数据存储在文件中，但是在文件中读写数据速度相对较慢。所以，现在我们使用关系型数据库管理系统（RDBMS）来存储和管理的大数据量。所谓的关系型数据库，是建立在关系模型基础上的数据库，借助于集合代数等">
-<meta name="twitter:image" content="http://i.imgur.com/pvHdTG0.png">
+<meta name="twitter:title" content="MVC/MVP/MVVM的区别">
+<meta name="twitter:description" content="#MVCMVC模式的意思是，软件可以分成三个部分。
+
+视图（View）：用户界面。
+控制器（Controller）：业务逻辑
+模型（Model）：数据保存
+
+各部分之间的通信方式如下:
+
+View 传送指令到 Controller  
+Controller 完成业务逻辑后，要求 Model 改变状态  
+Model 将新的数据发送到 View，用户得到反馈  
+
+####所有通信都是单向的。
+##">
+<meta name="twitter:image" content="http://image.beekka.com/blog/2015/bg2015020104.png">
 
 
 
@@ -132,13 +168,13 @@
 
 
 
-  <link rel="canonical" href="https://xingshijun.github.io/time.github.io/2017/01/03/MySQL/"/>
+  <link rel="canonical" href="https://xingshijun.github.io/time.github.io/2017/02/11/MVC-MVP-MVVM/"/>
 
 
 
 
 
-  <title> MySQL | Timer </title>
+  <title> MVC/MVP/MVVM的区别 | Timer </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -261,7 +297,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="https://xingshijun.github.io/time.github.io/time.github.io/2017/01/03/MySQL/">
+  <link itemprop="mainEntityOfPage" href="https://xingshijun.github.io/time.github.io/time.github.io/2017/02/11/MVC-MVP-MVVM/">
 
   <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
     <meta itemprop="name" content="Time">
@@ -285,7 +321,7 @@
             
             
               
-                MySQL
+                MVC/MVP/MVVM的区别
               
             
           </h1>
@@ -300,8 +336,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-01-03T08:37:29+08:00">
-                2017-01-03
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-02-11T22:34:08+08:00">
+                2017-02-11
               </time>
             
 
@@ -323,8 +359,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/time.github.io/categories/MySQL/" itemprop="url" rel="index">
-                    <span itemprop="name">MySQL</span>
+                  <a href="/time.github.io/categories/MVC/" itemprop="url" rel="index">
+                    <span itemprop="name">MVC</span>
                   </a>
                 </span>
 
@@ -341,8 +377,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/time.github.io/2017/01/03/MySQL/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/01/03/MySQL/" itemprop="commentCount"></span>
+                <a href="/time.github.io/2017/02/11/MVC-MVP-MVVM/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/02/11/MVC-MVP-MVVM/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -368,30 +404,33 @@
       
 
       
-        <p>#MySQL初见</p>
-<p>##什么是数据库？<br>数据库（Database）是按照数据结构来组织、存储和管理数据的仓库。</p>
-<p>每个数据库都有一个或多个不同的API用于创建，访问，管理，搜索和复制所保存的数据。</p>
-<p>我们也可以将数据存储在文件中，但是在文件中读写数据速度相对较慢。<br>所以，现在我们使用<strong>关系型数据库管理系统（RDBMS）</strong>来存储和管理的大数据量。所谓的关系型数据库，是建立在关系模型基础上的数据库，借助于集合代数等数学概念和方法来处理数据库中的数据</p>
-<p>RDBMS即关系数据库管理系统(Relational Database Management System)的特点：</p>
-<ol>
-<li>数据以表格的形式出现</li>
-<li>每行为各种记录名称</li>
-<li>每列为记录名称所对应的数据域</li>
-<li>许多的行和列组成一张表单</li>
-<li>若干的表单组成database<br><img src="http://i.imgur.com/pvHdTG0.png" alt=""><br>##RDBMS 术语</li>
-</ol>
+        <p>#MVC<br>MVC模式的意思是，软件可以分成三个部分。<br><img src="http://image.beekka.com/blog/2015/bg2015020104.png" alt=""></p>
 <ul>
-<li><strong>数据库</strong>: 数据库是一些关联表的集合。</li>
-<li><strong>数据表</strong>: 表是数据的矩阵。在一个数据库中的表看起来像一个简单的电子表格。</li>
-<li><strong>列</strong>: 一列(数据元素) 包含了相同的数据, 例如邮政编码的数据。</li>
-<li><strong>行</strong>：一行（=元组，或记录）是一组相关的数据，例如一条用户订阅的数据。</li>
-<li><strong>冗余</strong>：存储两倍数据，冗余可以使系统速度更快。</li>
-<li><strong>主键</strong>：主键是唯一的。一个数据表中只能包含一个主键。你可以使用主键来查询数据。</li>
-<li><strong>外键</strong>：外键用于关联两个表。</li>
-<li><strong>复合键</strong>：复合键（组合键）将多个列作为一个索引键，一般用于复合索引。</li>
-<li><strong>索引</strong>：使用索引可快速访问数据库表中的特定信息。索引是对数据库表中一列或多列的值进行排序的一种结构。类似于书籍的目录。</li>
-<li><strong>参照完整性</strong>: 参照的完整性要求关系中不允许引用不存在的实体。与实体完整性是关系- 模型必须满足的完整性约束条件，目的是保证数据的一致性。</li>
+<li>视图（View）：用户界面。</li>
+<li>控制器（Controller）：业务逻辑</li>
+<li>模型（Model）：数据保存</li>
 </ul>
+<p>各部分之间的通信方式如下:<br><img src="http://image.beekka.com/blog/2015/bg2015020105.png" alt=""></p>
+<ol>
+<li>View 传送指令到 Controller  </li>
+<li>Controller 完成业务逻辑后，要求 Model 改变状态  </li>
+<li>Model 将新的数据发送到 View，用户得到反馈  </li>
+</ol>
+<p>####所有通信都是单向的。</p>
+<p>##MVC互动模式<br>接受用户指令时，MVC 可以分成两种方式。一种是通过 View 接受指令，传递给 Controller。<br><img src="http://image.beekka.com/blog/2015/bg2015020106.png" alt=""><br>另一种是直接通过controller接受指令。<br><img src="http://image.beekka.com/blog/2015/bg2015020107.png" alt=""></p>
+<p>##实例：Backbone JS<br><img src="http://image.beekka.com/blog/2015/bg2015020108.png" alt=""></p>
+<ol>
+<li>用户可以向 View 发送指令（DOM 事件），再由 View 直接要求 Model 改变状态。</li>
+<li>用户也可以直接向 Controller 发送指令（改变 URL 触发 hashChange 事件），再由 Controller 发送给 View。</li>
+<li>Controller 非常薄，只起到路由的作用，而 View 非常厚，业务逻辑都部署在 View。所以，Backbone 索性取消了 Controller，只保留一个 Router（路由器） 。</li>
+</ol>
+<p>#MVP<br>MVP 模式将 Controller 改名为 Presenter，同时改变了通信方向。<br><img src="http://image.beekka.com/blog/2015/bg2015020109.png" alt=""></p>
+<ol>
+<li>各部分之间的通信，都是双向的。</li>
+<li>View 与 Model 不发生联系，都通过 Presenter 传递。</li>
+<li>View 非常薄，不部署任何业务逻辑，称为”被动视图”（Passive View），即没有任何主动性，而 Presenter非常厚，所有逻辑都部署在那里。</li>
+</ol>
+<p>#MVVM<br>MVVM 模式将 Presenter 改名为 ViewModel，基本上与 MVP 模式完全一致。<br><img src="http://image.beekka.com/blog/2015/bg2015020110.png" alt=""><br>唯一的区别是，它采用双向绑定（data-binding）：View的变动，自动反映在 ViewModel，反之亦然。Angular 和 Ember 都采用这种模式。</p>
 
       
     </div>
@@ -415,7 +454,7 @@
       
         <div class="post-tags">
           
-            <a href="/time.github.io/tags/MySQL/" rel="tag"># MySQL</a>
+            <a href="/time.github.io/tags/MVC/" rel="tag"># MVC</a>
           
         </div>
       
@@ -424,15 +463,15 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
+              <a href="/time.github.io/2017/01/16/Position/" rel="next" title="Position'">
+                <i class="fa fa-chevron-left"></i> Position'
+              </a>
+            
           </div>
 
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/time.github.io/2017/01/03/MySQL install/" rel="prev" title="MySQL安装">
-                MySQL安装 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -458,8 +497,8 @@
           
   <div class="comments" id="comments">
     
-      <div class="ds-thread" data-thread-key="2017/01/03/MySQL/"
-           data-title="MySQL" data-url="https://xingshijun.github.io/time.github.io/time.github.io/2017/01/03/MySQL/">
+      <div class="ds-thread" data-thread-key="2017/02/11/MVC-MVP-MVVM/"
+           data-title="MVC/MVP/MVVM的区别" data-url="https://xingshijun.github.io/time.github.io/time.github.io/2017/02/11/MVC-MVP-MVVM/">
       </div>
     
   </div>
