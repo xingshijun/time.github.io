@@ -248,6 +248,165 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <link itemprop="mainEntityOfPage" href="https://xingshijun.github.io/time.github.io/time.github.io/2017/02/13/JQuery-lazyload/">
+
+  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="Time">
+    <meta itemprop="description" content="">
+    <meta itemprop="image" content="/time.github.io/images/avatar.gif">
+  </span>
+
+  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="Timer">
+    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+      <img style="display:none;" itemprop="url image" alt="Timer" src="">
+    </span>
+  </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/time.github.io/2017/02/13/JQuery-lazyload/" itemprop="url">
+                  JQuery-lazyload
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-02-13T21:47:11+08:00">
+                2017-02-13
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/time.github.io/categories/JQuery/" itemprop="url" rel="index">
+                    <span itemprop="name">JQuery</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/time.github.io/2017/02/13/JQuery-lazyload/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/02/13/JQuery-lazyload/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="使用方法"><a href="#使用方法" class="headerlink" title="使用方法"></a>使用方法</h1><p>引用jquery和jquery.lazyload.js到你的页面</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">&lt;script src=&quot;jquery-1.11.0.min.js&quot;&gt;&lt;/script&gt;</div><div class="line">&lt;script src=&quot;jquery.lazyload.js?v=1.9.1&quot;&gt;&lt;/script&gt;</div></pre></td></tr></table></figure>
+<h1 id="html图片调用方法"><a href="#html图片调用方法" class="headerlink" title="html图片调用方法"></a>html图片调用方法</h1><h3 id="为图片加入样式lazy-图片路径引用方法用data-original"><a href="#为图片加入样式lazy-图片路径引用方法用data-original" class="headerlink" title="为图片加入样式lazy  图片路径引用方法用data-original"></a>为图片加入样式lazy  图片路径引用方法用data-original</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">&lt;img class=&quot;lazy&quot; data-original=&quot;img/bmw_m1_hood.jpg&quot;&gt;</div><div class="line">&lt;img class=&quot;lazy&quot; data-original=&quot;img/bmw_m1_side.jpg&quot;&gt;</div><div class="line">&lt;img class=&quot;lazy&quot; data-original=&quot;img/viper_1.jpg&quot;&gt;</div><div class="line">&lt;img class=&quot;lazy&quot; data-original=&quot;img/viper_corner.jpg&quot;&gt;</div><div class="line">&lt;img class=&quot;lazy&quot; data-original=&quot;img/bmw_m3_gt.jpg&quot;&gt;</div><div class="line">&lt;img class=&quot;lazy&quot; data-original=&quot;img/corvette_pitstop.jpg&quot;&gt;</div></pre></td></tr></table></figure>
+<h3 id="js初始化lazyload并设置图片显示方式"><a href="#js初始化lazyload并设置图片显示方式" class="headerlink" title="js初始化lazyload并设置图片显示方式"></a>js初始化lazyload并设置图片显示方式</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">&lt;script type=&quot;text/javascript&quot; charset=&quot;utf-8&quot;&gt;</div><div class="line">  $(function() &#123;</div><div class="line">      $(&quot;img.lazy&quot;).lazyload(&#123;effect: &quot;fadeIn&quot;&#125;);</div><div class="line">  &#125;);</div><div class="line">&lt;/script&gt;</div></pre></td></tr></table></figure>
+<p>在图片中也可以不使用 class=”lazy”，初始化时使用：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$(&quot;img&quot;).lazyload(&#123;effect: &quot;fadeIn&quot;&#125;);</div></pre></td></tr></table></figure>
+<p>这样就可以对全局的图片都有效！</p>
+<p>如果想提载入图片，可以使用 threshold 进行设置，<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$(&quot;img.lazy&quot;).lazyload(&#123; threshold :180&#125;);</div></pre></td></tr></table></figure></p>
+<p>以上实例的含义是：在图片距离屏幕180px时提前载入：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">$(&quot;img.lazy&quot;).lazyload(&#123;</div><div class="line">  placeholder : &quot;img/grey.gif&quot;, //用图片提前占位</div><div class="line">    // placeholder,值为某一图片路径.此图片用来占据将要加载的图片的位置,待图片加载时,占位图则会隐藏</div><div class="line">  effect: &quot;fadeIn&quot;, // 载入使用何种效果</div><div class="line">    // effect(特效),值有show(直接显示),fadeIn(淡入),slideDown(下拉)等,常用fadeIn</div><div class="line">  threshold: 200, // 提前开始加载</div><div class="line">    // threshold,值为数字,代表页面高度.如设置为200,表示滚动条在离目标位置还有200的高度时就开始加载图片,可以做到不让用户察觉</div><div class="line">  event: &apos;click&apos;,  // 事件触发时才加载</div><div class="line">    // event,值有click(点击),mouseover(鼠标划过),sporty(运动的),foobar(…).可以实现鼠标莫过或点击图片才开始加载,后两个值未测试…</div><div class="line">  container: $(&quot;#container&quot;),  // 对某容器中的图片实现效果</div><div class="line">    // container,值为某容器.lazyload默认在拉动浏览器滚动条时生效,这个参数可以让你在拉动某DIV的滚动条时依次加载其中的图片</div><div class="line">  failurelimit : 10 // 图片排序混乱时</div><div class="line">     // failurelimit,值为数字.lazyload默认在找到第一张不在可见区域里的图片时则不再继续加载,但当HTML容器混乱的时候可能出现可见区域内图片并没加载出来的情况,failurelimit意在加载N张可见区域外的图片,以避免出现这个问题.</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
   <link itemprop="mainEntityOfPage" href="https://xingshijun.github.io/time.github.io/time.github.io/2017/02/11/MVC-MVP-MVVM/">
 
   <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1402,7 +1561,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/time.github.io/archives">
-                <span class="site-state-item-count">7</span>
+                <span class="site-state-item-count">8</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -1411,7 +1570,7 @@
           
             <div class="site-state-item site-state-categories">
               <a href="/time.github.io/categories">
-                <span class="site-state-item-count">3</span>
+                <span class="site-state-item-count">4</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -1420,7 +1579,7 @@
           
             <div class="site-state-item site-state-tags">
               <a href="/time.github.io/tags">
-                <span class="site-state-item-count">4</span>
+                <span class="site-state-item-count">5</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
