@@ -1,0 +1,785 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/time.github.io/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/time.github.io/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/time.github.io/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Node," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/time.github.io/favicon.ico?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="1.复习1.1模块的分类
+核心模块
+文件模块—-特殊的文件模块—&amp;gt;包1.2模块三兄弟 require、module、exports
+
+
+require查找文件、包原理
+123.js、.node、.json依次帮你补足，第二次加载的时候优先从缓存查找读取，node_modules中没有的，从父文件夹中查找，如果没有，直到根目录为止
+
+module
+12里面保存了模块的信息路径、父子信息、曝露出">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Node3">
+<meta property="og:url" content="https://xingshijun.github.io/time.github.io/2017/02/15/Node3/index.html">
+<meta property="og:site_name" content="Timer">
+<meta property="og:description" content="1.复习1.1模块的分类
+核心模块
+文件模块—-特殊的文件模块—&amp;gt;包1.2模块三兄弟 require、module、exports
+
+
+require查找文件、包原理
+123.js、.node、.json依次帮你补足，第二次加载的时候优先从缓存查找读取，node_modules中没有的，从父文件夹中查找，如果没有，直到根目录为止
+
+module
+12里面保存了模块的信息路径、父子信息、曝露出">
+<meta property="og:updated_time" content="2017-02-14T17:51:34.696Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Node3">
+<meta name="twitter:description" content="1.复习1.1模块的分类
+核心模块
+文件模块—-特殊的文件模块—&amp;gt;包1.2模块三兄弟 require、module、exports
+
+
+require查找文件、包原理
+123.js、.node、.json依次帮你补足，第二次加载的时候优先从缓存查找读取，node_modules中没有的，从父文件夹中查找，如果没有，直到根目录为止
+
+module
+12里面保存了模块的信息路径、父子信息、曝露出">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/time.github.io/',
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://xingshijun.github.io/time.github.io/2017/02/15/Node3/"/>
+
+
+
+
+
+  <title> Node3 | Timer </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/time.github.io/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Timer</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+    
+      <p class="site-subtitle"></p>
+    
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/time.github.io/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/time.github.io/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/time.github.io/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/time.github.io/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <link itemprop="mainEntityOfPage" href="https://xingshijun.github.io/time.github.io/time.github.io/2017/02/15/Node3/">
+
+  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="Time">
+    <meta itemprop="description" content="">
+    <meta itemprop="image" content="/time.github.io/images/avatar.gif">
+  </span>
+
+  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="Timer">
+    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+      <img style="display:none;" itemprop="url image" alt="Timer" src="">
+    </span>
+  </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                Node3
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-02-15T00:53:49+08:00">
+                2017-02-15
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/time.github.io/categories/Node/" itemprop="url" rel="index">
+                    <span itemprop="name">Node</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/time.github.io/2017/02/15/Node3/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/02/15/Node3/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="1-复习"><a href="#1-复习" class="headerlink" title="1.复习"></a>1.复习</h1><h3 id="1-1模块的分类"><a href="#1-1模块的分类" class="headerlink" title="1.1模块的分类"></a>1.1模块的分类</h3><ol>
+<li>核心模块</li>
+<li>文件模块—-特殊的文件模块—&gt;包<h3 id="1-2模块三兄弟-require、module、exports"><a href="#1-2模块三兄弟-require、module、exports" class="headerlink" title="1.2模块三兄弟 require、module、exports"></a>1.2模块三兄弟 require、module、exports</h3></li>
+</ol>
+<ul>
+<li><p>require查找文件、包原理</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">.js、.node、.json依次帮你补足，</div><div class="line">第二次加载的时候优先从缓存查找读取，</div><div class="line">node_modules中没有的，从父文件夹中查找，如果没有，直到根目录为止</div></pre></td></tr></table></figure>
+</li>
+<li><p>module</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">里面保存了模块的信息路径、父子信息、曝露出的对象信息</div><div class="line">module.exports---&gt;曝露属性和方法的对象</div></pre></td></tr></table></figure>
+</li>
+<li><p>exports</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">module.exports 别名</div><div class="line">module.exports=123;已经使用过一次了，exports就不生效了</div><div class="line">module.exports.a=12;这样使用,exports是还可以使用的</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="1-3包"><a href="#1-3包" class="headerlink" title="1.3包"></a>1.3包</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">package.json是包的说明书，</div><div class="line">dependencies当前包所依赖的包：&gt;、&lt;、&gt;=、&lt;=、~、*、&quot; &quot;、X、^、</div><div class="line">devDependencies 开发环境中包所依赖的包：</div></pre></td></tr></table></figure>
+<h3 id="1-4npm"><a href="#1-4npm" class="headerlink" title="1.4npm"></a>1.4npm</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">npm init  创建package.json文件</div><div class="line">npm install  将package.json中的文件依赖的包从网上下载到本地</div><div class="line">npm install -save 包名  将包下载下来并且加载到dependencies中去</div><div class="line">npm i -S 包名 替代上面的命令</div><div class="line">npm install -save-dev 包名 将包下载下来并且加载到devDependencies中去</div><div class="line">npm i -D 包名 替代上面的命令</div><div class="line">npm install -g 包名 全局安装  安装的是全局工具</div><div class="line">npm docs 包名 查看包的文档</div></pre></td></tr></table></figure>
+<h3 id="1-5箭头函数"><a href="#1-5箭头函数" class="headerlink" title="1.5箭头函数"></a>1.5箭头函数</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">语法糖替代function()&#123;&#125;  v=&gt;v</div></pre></td></tr></table></figure>
+<h2 id="2网络编程"><a href="#2网络编程" class="headerlink" title="2网络编程"></a>2网络编程</h2><p>bs browser server<br>cs client server</p>
+<h3 id="2-1什么是服务器？"><a href="#2-1什么是服务器？" class="headerlink" title="2.1什么是服务器？"></a>2.1什么是服务器？</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">服务器就是一个台电脑，是一台性能比较好的大电脑，它需要支持高扩展性，提供服务的</div></pre></td></tr></table></figure>
+<h3 id="2-2什么是web服务器？"><a href="#2-2什么是web服务器？" class="headerlink" title="2.2什么是web服务器？"></a>2.2什么是web服务器？</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">web服务器是一种应用服务器，提供了web服务，对内提供web应用程序的的运行环境</div></pre></td></tr></table></figure>
+<p>Apache、Nginx、IIS、tomcat</p>
+<h3 id="2-3Node-没有-Web-容器（web服务器）"><a href="#2-3Node-没有-Web-容器（web服务器）" class="headerlink" title="2.3Node 没有 Web 容器（web服务器）"></a>2.3Node 没有 Web 容器（web服务器）</h3><p>如果我用js写了一个web应用程序，那么node就是web服务器<br>.net平台的 ASP或者ASP.net 需要 IIS 作为服务器容器，<br>PHP需要搭载 Apache 或者 Nginx 作为服务器容器，<br>Java 的 JSP 需要 tomcat 作为服务器容器，<br>ruby 的 ruby on rails 需要 搭配 Apache 等作为自己的服务器容器。<br>Node，不需要服务器容器。<br>Node，不需要服务器容器。<br>Node，不需要服务器容器。</p>
+<h3 id="2-4ip-amp-端口号"><a href="#2-4ip-amp-端口号" class="headerlink" title="2.4ip&amp;端口号"></a>2.4ip&amp;端口号</h3><p>ip—&gt;唯一标识一台上网的设备<br>端口—&gt;唯一标识设备上的一个应用程序</p>
+<p>localhost:3000 不走网卡<br>127.0.0.1:3000  走网卡<br>192.168.141.XXX 通过网卡发请求给路由或交换机，在请求回来你的电脑</p>
+<h3 id="2-5-如何通过域名找到服务器-见图"><a href="#2-5-如何通过域名找到服务器-见图" class="headerlink" title="2.5 如何通过域名找到服务器 见图"></a>2.5 如何通过域名找到服务器 见图</h3><h3 id="2-6-http协议"><a href="#2-6-http协议" class="headerlink" title="2.6 http协议"></a>2.6 http协议</h3><p>HTTP协议就是 浏览器 和 服务器 之间通信的一个数据格式规范<br>服务器之间通信也可以使用http协议<br>在HTTP协议中，始终是以一种 一问一答 的形式在进行沟通和交流（数据交换）<br>服务器如果没有收到浏览器的请求消息，服务器永远不会主动的发送响应消息<br>浏览器不发出请求，服务器不会主动的发送响应</p>
+<ul>
+<li>浏览器发送请求数据到服务器</li>
+<li>服务器解析浏览器发送的请求数据</li>
+<li>服务器响应数据到客户端浏览器</li>
+</ul>
+<h2 id="http-模块"><a href="#http-模块" class="headerlink" title="http 模块"></a>http 模块</h2><h3 id="使用-http-模块进行web开发"><a href="#使用-http-模块进行web开发" class="headerlink" title="使用 http 模块进行web开发"></a>使用 http 模块进行web开发</h3><ul>
+<li>创建 HTTP 服务器</li>
+</ul>
+<p><code>http.createServer([requestListener])</code></p>
+<ul>
+<li><p>通过监听Event: ‘request’来进行<br>server.on(‘request’,(request,response) =&gt; {});</p>
+</li>
+<li><p>request、response对象<br>request对象，用于接收请求报文内的信息<br>response对象，用于返回响应报文内的信息</p>
+</li>
+<li><p>response.write()<br>write方法用于向响应体里写内容，用于向客户端发送信息，可以被多次使用</p>
+</li>
+<li><p>response.end()<br>在一次请求和响应过程当中，只要调用了  end 就不能再继续 write 了<br>就说明你是在一次请求和响应处理过程中已经结束了响应，但是又去 向客户端发送数据<br>这个时候就会报错</p>
+</li>
+<li><p>server.listen(port[, hostname][, backlog][, callback])<br>监听端口，执行这句，服务正式被启动使用<br>server.listen(3000,’127.0.0.1’,() =&gt; {<br>console.log(‘server is listening at port 3000’);<br>});</p>
+</li>
+</ul>
+<h3 id="request"><a href="#request" class="headerlink" title="request"></a>request</h3><ul>
+<li>request.headers 请求头</li>
+<li>request.method 请求方法</li>
+<li>request.url 请求路径</li>
+<li>request.httpVersion 请求HTTP协议版本</li>
+</ul>
+<h3 id="response"><a href="#response" class="headerlink" title="response"></a>response</h3><ul>
+<li>res.writeHead(200,{‘Content-Type’: ‘text/html; charset=utf-8’});<br>设置响应报文头</li>
+<li>res.write(‘&lt; h1&gt;hello world&lt; /h1&gt;’);</li>
+<li>res.end();</li>
+</ul>
+<h3 id="Content-Type"><a href="#Content-Type" class="headerlink" title="Content-Type"></a>Content-Type</h3><p>内容类型，一般是指网页中存在的Content-Type，用于定义网络文件的类型和网页的编码，<br>决定文件接收方将以什么形式、什么编码读取这个文</p>
+<h3 id="通过-req-url和req-method的不同给出不同的响应"><a href="#通过-req-url和req-method的不同给出不同的响应" class="headerlink" title="通过 req.url和req.method的不同给出不同的响应"></a>通过 req.url和req.method的不同给出不同的响应</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">if (req.url == &apos;/&apos; &amp;&amp; req.method == &apos;GET&apos;) &#123;</div><div class="line">  res.writeHead(200, &#123;</div><div class="line">    &apos;Content-Type&apos;: &apos;text/html; charset=utf-8&apos;</div><div class="line">  &#125;);</div><div class="line">  res.write(&apos;&lt; h1&gt;首页&lt; /h1&gt;&apos;);</div><div class="line">  res.end();</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="request通过data事件和end事件来接收post的数据"><a href="#request通过data事件和end事件来接收post的数据" class="headerlink" title="request通过data事件和end事件来接收post的数据"></a>request通过data事件和end事件来接收post的数据</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">let data = &apos;&apos;;</div><div class="line">req.on(&apos;data&apos;, (chunk) =&gt; &#123;</div><div class="line">      data += chunk;</div><div class="line">&#125;);  </div><div class="line"> req.on(&apos;end&apos;, () =&gt; &#123;</div><div class="line">      console.log(data);</div><div class="line">      res.writeHead(200, &#123;</div><div class="line">        &apos;Content-Type&apos;: &apos;text/html; charset=utf-8&apos;</div><div class="line">      &#125;);</div><div class="line">      res.write(&apos;&lt; h1&gt;收到数据了&lt; /h1&gt;&apos;);</div><div class="line">      res.end();</div><div class="line"> &#125;);</div></pre></td></tr></table></figure>
+<h3 id="通过-querystring解析post的数据"><a href="#通过-querystring解析post的数据" class="headerlink" title="通过 querystring解析post的数据"></a>通过 querystring解析post的数据</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">querystring.parse(&apos;foo=bar&amp;baz=qux&amp;baz=quux&amp;corge&apos;)</div><div class="line">// returns &#123; foo: &apos;bar&apos;, baz: [&apos;qux&apos;, &apos;quux&apos;], corge: &apos;&apos; &#125;</div></pre></td></tr></table></figure>
+<h3 id="url"><a href="#url" class="headerlink" title="url"></a>url</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div></pre></td><td class="code"><pre><div class="line">- url.parse(urlStr, [parseQueryString], [slashesDenoteHost])</div><div class="line">urlStr-&gt;url字符串</div><div class="line">parseQueryString-&gt;为true时将使用queryString分析查询字符串，默认为false</div><div class="line">slashesDenoteHost               </div><div class="line">默认为false，//foo/bar 形式的字符串将被解释成 &#123; pathname: ‘//foo/bar&apos; &#125;</div><div class="line">如果设置成true，//foo/bar 形式的字符串将被解释成  &#123; host: ‘foo&apos;, pathname: ‘/bar&apos; &#125;</div><div class="line"></div><div class="line"></div><div class="line">服务器相关操作事件和API</div><div class="line"></div><div class="line">- Event: &apos;close&apos;</div><div class="line">- Event: &apos;connection&apos;</div><div class="line">- Event: &apos;request&apos;</div><div class="line">- server.close([callback])</div><div class="line">- server.listen(port[, hostname][, backlog][, callback])</div><div class="line"></div><div class="line">请求对象</div><div class="line">- Event: &apos;data&apos;</div><div class="line">- message.headers</div><div class="line">- message.httpVersion</div><div class="line">- message.method</div><div class="line">- message.url</div><div class="line">  + require(&apos;url&apos;).parse(request.url)</div><div class="line">  + require(&apos;url&apos;).parse(request.url, true)</div><div class="line"></div><div class="line">响应对象</div><div class="line">- response.end([data][, encoding][, callback])</div><div class="line">- response.setHeader(name, value)</div><div class="line">- response.statusCode</div><div class="line">- response.statusMessage</div><div class="line">- response.write(chunk[, encoding][, callback])</div><div class="line">- response.writeHead(statusCode[, statusMessage][, headers])</div></pre></td></tr></table></figure>
+<h1 id="2-同步与异步"><a href="#2-同步与异步" class="headerlink" title="2.同步与异步"></a>2.同步与异步</h1><h3 id="2-1什么是i-o？"><a href="#2-1什么是i-o？" class="headerlink" title="2.1什么是i/o？"></a>2.1什么是i/o？</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">io input、output 输入输出，电脑的输入输出，例如音频录音表示声音输入、听音乐是声音的输出</div><div class="line">网络上的传输全部是在传字符串，i/o在服务器上可以理解为读写操作。</div></pre></td></tr></table></figure>
+<h3 id="2-2什么是并发？"><a href="#2-2什么是并发？" class="headerlink" title="2.2什么是并发？"></a>2.2什么是并发？</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">一个时间段中有几个程序都处于已启动运行到运行完毕之间。</div></pre></td></tr></table></figure>
+<h1 id="3异步i-o与事件驱动"><a href="#3异步i-o与事件驱动" class="headerlink" title="3异步i/o与事件驱动"></a>3异步i/o与事件驱动</h1><h3 id="3-1什么是进程？"><a href="#3-1什么是进程？" class="headerlink" title="3.1什么是进程？"></a>3.1什么是进程？</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">进程是为运行当中的应用程序提供运行环境的</div><div class="line">一个运行当中的应用程序就会有一个进程与之相对应</div></pre></td></tr></table></figure>
+<h3 id="3-2什么是线程？"><a href="#3-2什么是线程？" class="headerlink" title="3.2什么是线程？"></a>3.2什么是线程？</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">线程是用来运行应用程序中代码的，</div><div class="line">一个线程在一个时间只能做一件事件。</div><div class="line">多线程，调度起来很麻烦。</div><div class="line">node是单线程执行，用异步替代了多线程</div></pre></td></tr></table></figure>
+<h3 id="3-3同步、异步有什么不同？"><a href="#3-3同步、异步有什么不同？" class="headerlink" title="3.3同步、异步有什么不同？"></a>3.3同步、异步有什么不同？</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">异步不会阻塞后面的代码，同步会阻塞后面的代码</div><div class="line">一条线程先执行同步的代码后执行异步的代码。</div></pre></td></tr></table></figure>
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/time.github.io/tags/Node/" rel="tag"># Node</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/time.github.io/2017/02/15/Node1/" rel="next" title="Node1">
+                <i class="fa fa-chevron-left"></i> Node1
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/time.github.io/2017/02/15/Node4/" rel="prev" title="Node4">
+                Node4 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2017/02/15/Node3/"
+           data-title="Node3" data-url="https://xingshijun.github.io/time.github.io/time.github.io/2017/02/15/Node3/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/time.github.io/images/avatar.gif"
+               alt="Time" />
+          <p class="site-author-name" itemprop="name">Time</p>
+          <p class="site-description motion-element" itemprop="description"></p>
+        </div>
+        <nav class="site-state motion-element">
+        
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/time.github.io/archives">
+                <span class="site-state-item-count">14</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/time.github.io/categories">
+                <span class="site-state-item-count">6</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/time.github.io/tags">
+                <span class="site-state-item-count">6</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#1-复习"><span class="nav-number">1.</span> <span class="nav-text">1.复习</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-1模块的分类"><span class="nav-number">1.0.1.</span> <span class="nav-text">1.1模块的分类</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-2模块三兄弟-require、module、exports"><span class="nav-number">1.0.2.</span> <span class="nav-text">1.2模块三兄弟 require、module、exports</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-3包"><span class="nav-number">1.0.3.</span> <span class="nav-text">1.3包</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-4npm"><span class="nav-number">1.0.4.</span> <span class="nav-text">1.4npm</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-5箭头函数"><span class="nav-number">1.0.5.</span> <span class="nav-text">1.5箭头函数</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2网络编程"><span class="nav-number">1.1.</span> <span class="nav-text">2网络编程</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1什么是服务器？"><span class="nav-number">1.1.1.</span> <span class="nav-text">2.1什么是服务器？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2什么是web服务器？"><span class="nav-number">1.1.2.</span> <span class="nav-text">2.2什么是web服务器？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-3Node-没有-Web-容器（web服务器）"><span class="nav-number">1.1.3.</span> <span class="nav-text">2.3Node 没有 Web 容器（web服务器）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-4ip-amp-端口号"><span class="nav-number">1.1.4.</span> <span class="nav-text">2.4ip&端口号</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-5-如何通过域名找到服务器-见图"><span class="nav-number">1.1.5.</span> <span class="nav-text">2.5 如何通过域名找到服务器 见图</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-6-http协议"><span class="nav-number">1.1.6.</span> <span class="nav-text">2.6 http协议</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#http-模块"><span class="nav-number">1.2.</span> <span class="nav-text">http 模块</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#使用-http-模块进行web开发"><span class="nav-number">1.2.1.</span> <span class="nav-text">使用 http 模块进行web开发</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#request"><span class="nav-number">1.2.2.</span> <span class="nav-text">request</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#response"><span class="nav-number">1.2.3.</span> <span class="nav-text">response</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Content-Type"><span class="nav-number">1.2.4.</span> <span class="nav-text">Content-Type</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#通过-req-url和req-method的不同给出不同的响应"><span class="nav-number">1.2.5.</span> <span class="nav-text">通过 req.url和req.method的不同给出不同的响应</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#request通过data事件和end事件来接收post的数据"><span class="nav-number">1.2.6.</span> <span class="nav-text">request通过data事件和end事件来接收post的数据</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#通过-querystring解析post的数据"><span class="nav-number">1.2.7.</span> <span class="nav-text">通过 querystring解析post的数据</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#url"><span class="nav-number">1.2.8.</span> <span class="nav-text">url</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2-同步与异步"><span class="nav-number">2.</span> <span class="nav-text">2.同步与异步</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1什么是i-o？"><span class="nav-number">2.0.1.</span> <span class="nav-text">2.1什么是i/o？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2什么是并发？"><span class="nav-number">2.0.2.</span> <span class="nav-text">2.2什么是并发？</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#3异步i-o与事件驱动"><span class="nav-number">3.</span> <span class="nav-text">3异步i/o与事件驱动</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#3-1什么是进程？"><span class="nav-number">3.0.1.</span> <span class="nav-text">3.1什么是进程？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-2什么是线程？"><span class="nav-number">3.0.2.</span> <span class="nav-text">3.2什么是线程？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-3同步、异步有什么不同？"><span class="nav-number">3.0.3.</span> <span class="nav-text">3.3同步、异步有什么不同？</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Time</span>
+</div>
+
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/time.github.io/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/time.github.io/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/time.github.io/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/time.github.io/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/time.github.io/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/time.github.io/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/time.github.io/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/time.github.io/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/time.github.io/js/src/affix.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/time.github.io/js/src/schemes/pisces.js?v=5.1.0"></script>
+
+
+
+  
+  <script type="text/javascript" src="/time.github.io/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/time.github.io/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/time.github.io/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"clouddays"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+    
+    <script src="/time.github.io/lib/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
+    <script src="/time.github.io/js/src/hook-duoshuo.js"></script>
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+
+</body>
+</html>
